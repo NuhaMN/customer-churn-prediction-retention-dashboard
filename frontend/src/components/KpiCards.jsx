@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import CountUp from 'react-countup';
 import { mockStats } from '../utils/mockData';
@@ -8,33 +8,64 @@ const cards = [
     title: 'Customers At Risk',
     value: mockStats.highRisk,
     color: 'text-red-400',
-    trend: '+12%',
     width: '19%'
   },
   {
     title: 'Revenue At Risk',
     value: `$${mockStats.revenueAtRisk.toLocaleString()}`,
     color: 'text-emerald-400',
-    trend: '+8%',
     width: '45%'
   },
   {
     title: 'Retention Opportunities',
     value: mockStats.retentionOps,
     color: 'text-cyan-400',
-    trend: '+15%',
     width: '80%'
   },
   {
     title: 'Model Performance',
     value: `${mockStats.modelAccuracy}%`,
     color: 'text-purple-400',
-    trend: '+2%',
     width: '84%'
   }
 ];
 
 export default function KpiCards() {
+  const [modelPerformance, setModelPerformance] = useState(mockStats.modelAccuracy);
+
+useEffect(() => {
+  fetch("http://127.0.0.1:5000/model-performance")
+    .then((res) => res.json())
+    .then((data) => setModelPerformance(data.performance))
+    .catch((err) => console.error(err));
+}, []);
+
+const cards = [
+  {
+    title: 'Customers At Risk',
+    value: mockStats.highRisk,
+    color: 'text-red-400',
+    width: '19%'
+  },
+  {
+    title: 'Revenue At Risk',
+    value: `$${mockStats.revenueAtRisk.toLocaleString()}`,
+    color: 'text-emerald-400',
+    width: '45%'
+  },
+  {
+    title: 'Retention Opportunities',
+    value: mockStats.retentionOps,
+    color: 'text-cyan-400',
+    width: '80%'
+  },
+  {
+    title: 'Model Performance',
+    value: `${modelPerformance}%`,
+    color: 'text-purple-400',
+    width: '84%'
+  }
+];
   return (
     <div className="grid grid-cols-2 xl:grid-cols-4 gap-3">
       {cards.map((card) => (
@@ -46,10 +77,6 @@ export default function KpiCards() {
           <div className="flex items-center justify-between mb-2">
             <span className="text-gray-400 text-xs">
               {card.title}
-            </span>
-
-            <span className="text-emerald-400 text-[10px]">
-              {card.trend}
             </span>
           </div>
 

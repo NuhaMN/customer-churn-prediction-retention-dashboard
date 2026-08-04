@@ -3,7 +3,7 @@ import pandas as pd
 from flask_cors import CORS
 from flask import request
 
-from model_manager import predict
+from model_manager import predict, load_model
 
 app = Flask(__name__)
 CORS(app)
@@ -52,6 +52,15 @@ def simulate(customer_id):
 
     return jsonify({
         "churnRisk": round(churn_prob * 100, 2)
+    })
+@app.route("/model-performance")
+def model_performance():
+
+    _, _, model_name, metrics = load_model()
+
+    return jsonify({
+        "model": model_name,
+        "performance": round(metrics["roc_auc"] * 100, 2)
     })
 
 if __name__ == "__main__":

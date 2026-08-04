@@ -64,7 +64,7 @@ def _load_data(db_path=os.path.join(PROJECT_ROOT, "churn_data.db")):
 def train_and_save_best_model(
     test_size: float = 0.3,
     random_state: int = 42
-):
+    ):
 
 
     X, y = _load_data()
@@ -101,6 +101,7 @@ def train_and_save_best_model(
     best_model = None
     best_name = None
     best_auc = 0
+    best_metrics = {}
 
     for name, model in models.items():
 
@@ -127,19 +128,24 @@ def train_and_save_best_model(
             best_model = model
             best_name = name
 
+            best_metrics = {
+            "roc_auc": roc_auc
+    }
+
     print("\n===================================")
     print(f"Final Model : {best_name}")
     print("===================================\n")
 
     with open(MODEL_PATH, "wb") as f:
         pickle.dump(
-            {
-                "model": best_model,
-                "features": X.columns.tolist(),
-                "name": best_name
-            },
-            f
-        )
+    {
+        "model": best_model,
+        "features": X.columns.tolist(),
+        "name": best_name,
+        "metrics": best_metrics
+    },
+    f
+    )
 
     print(f"Saved {best_name} model to:\n{MODEL_PATH}")
 
@@ -160,7 +166,8 @@ def load_model():
     return (
         data["model"],
         data["features"],
-        data.get("name", "RandomForest")
+        data.get("name", "Random Forest"),
+        data.get("metrics", {})
     )
 
 
@@ -169,7 +176,7 @@ def predict(customer_dict: dict):
     Predict churn probability for a single customer.
     """
 
-    model, feature_cols, _ = load_model()
+    model, feature_cols, _, _ = load_model()
 
     df = pd.DataFrame([customer_dict])
 
