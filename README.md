@@ -1,13 +1,9 @@
 # Customer Churn Prediction and Retention Dashboard
 
 Customer churn is a major challenge for businesses because losing existing customers directly impacts revenue and growth. Predicting customers who are likely to leave allows companies to take preventive actions and improve customer retention.
-
 This project addresses this problem by combining Machine Learning with an interactive web dashboard to predict customer churn and provide actionable retention strategies.
-
 The dashboard provides company-level analytics, customer-level insights, personalized retention recommendations, and a What-If Simulator that helps visualize how different retention strategies can reduce churn risk.
-
 The application uses a Random Forest model for churn prediction, a Flask backend to serve predictions, and a React frontend to provide an interactive and user-friendly experience.
-
 ## Features
 - Predicts customer churn using a trained Random Forest model.
 - Displays company-level insights through KPIs and interactive visualizations.
@@ -29,7 +25,6 @@ The application uses a Random Forest model for churn prediction, a Flask backend
 - Random Forest
 ### Database
 - SQLite
-
 ### Data Processing
 - Pandas
 - NumPy
@@ -55,7 +50,6 @@ customer-churn-prediction-retention-dashboard/
 └── README.md              # Project documentation
 ```
 ## System Architecture
-
 ```text
                         User
                           │
@@ -76,5 +70,30 @@ customer-churn-prediction-retention-dashboard/
  Churn Prediction & Personalized
       Retention Recommendations
 ```
+## Requirements
+- Python 3.10+
+- Node.js 18+
+- npm
+## How It Works
+1. Customer data is loaded from the dataset and preprocessed.
+2. Categorical features are encoded before training the model.
+3. The Random Forest model predicts churn probability.
+4. Flask serves predictions through REST APIs.
+5. The React dashboard displays analytics and retention recommendations.
+## Model Performance
+
+| Metric | Score |
+|--------|------:|
+| Accuracy | 78.56% |
+| Precision | 58.77% |
+| Recall | 64.53% |
+| F1-Score | 61.51% |
+| ROC-AUC | 83.63% |
+## Future Improvements
+- Integrate Large Language Models (LLMs) to generate AI-powered personalized retention strategies instead of rule-based recommendations.
+- Support multiple telecom datasets by automatically adapting the preprocessing pipeline to new datasets.
+- Allow dynamic addition of new customer records through the dashboard.
+- Automatically retrain the machine learning model as new customer data becomes available.
+- Deploy the application to the cloud for real-time access.
 
 
