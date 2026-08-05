@@ -34,3 +34,10 @@ The application uses a Random Forest model for churn prediction, a Flask backend
 - Pandas
 - NumPy
 
+## Project Screenshots
+### Company Dashboard
+
+![Company Dashboard](images/customer-dashboard.png)
+### Customer Dashboard
+
+
