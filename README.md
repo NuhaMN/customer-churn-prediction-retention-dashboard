@@ -37,9 +37,9 @@ The application uses a Random Forest model for churn prediction, a Flask backend
 ### Company Dashboard
 ![Company Dashboard](images/company-dashboard.png)
 ### Customer Dashboard
-![Company Dashboard](images/customer-level-analysis.png)
+![Customer Dashboard](images/customer-level-analysis.png)
 ### Customer Selection
-![Company Dashboard](images/customer-selection-drop-down.png)
+![Customer Selection](images/customer-selection-drop-down.png)
 ## Project Structure
 ```text
 customer-churn-prediction-retention-dashboard/
@@ -47,8 +47,10 @@ customer-churn-prediction-retention-dashboard/
 ├── images/                # Dashboard screenshots
 ├── api.py                 # Flask API and endpoints
 ├── model_manager.py       # Model training and prediction
+├── best_model.pkl         # Trained Random Forest model
+├── preprocess.py          # Data preprocessing
+├── dataset.csv            # Customer churn dataset     
 ├── database_setup.py      # Database setup
-├── churn_data.db          # SQLite database
 ├── requirements.txt       # Project dependencies
 └── README.md              # Project documentation
 ```
